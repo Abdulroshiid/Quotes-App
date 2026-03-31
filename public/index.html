@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>QuoteHub | SQLite Project</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Daily Inspiration</h1>
+
+      <form id="quote-form">
+        <textarea
+          id="text"
+          placeholder="Enter a meaningful quote..."
+          required></textarea>
+        <input type="text" id="author" placeholder="Author name (optional)" />
+        <button type="submit">Share Quote</button>
+      </form>
+
+      <hr />
+
+      <div id="quote-list"></div>
+    </div>
+
+    <script src="index.js"></script>
+  </body>
+</html>
