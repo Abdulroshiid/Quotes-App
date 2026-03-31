@@ -2,7 +2,7 @@
   "name": "quotes-to-learn-sqlite",
   "version": "1.0.0",
   "description": "A quote app where users can add their own quotes and it stores to the database. This project is to have basic knowledge of SQLite",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "start": "nodemon index.js"
   },
