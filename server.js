@@ -3,19 +3,19 @@ const sqlite3 = require("sqlite3").verbose();
 const path = require("path");
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
-// 1. Database Connection
+//  Connect Database
 const db = new sqlite3.Database("./database.db", (err) => {
   if (err) console.error("Database opening error: ", err);
   console.log("Connected to SQLite database.");
 });
 
-// 2. Middleware
+// Middleware
 app.use(express.json()); // Allows server to read JSON sent from frontend
 app.use(express.static("public")); // Serves your HTML/CSS/JS files
 
-// 3. Initialize Table
+// Initialize SQLite Table
 db.run(`CREATE TABLE IF NOT EXISTS quotes (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     text TEXT NOT NULL,
@@ -23,8 +23,8 @@ db.run(`CREATE TABLE IF NOT EXISTS quotes (
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 )`);
 
-// 4. Routes
-// Fetch all quotes
+// Routes
+// Fetch all quotes in JSON format
 app.get("/get-quotes", (req, res) => {
   db.all("SELECT * FROM quotes ORDER BY created_at DESC", [], (err, rows) => {
     if (err) return res.status(500).json({ error: err.message });
