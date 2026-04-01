@@ -4,7 +4,7 @@
   "description": "A quote app where users can add their own quotes and it stores to the database. This project is to have basic knowledge of SQLite",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "node server.js"
   },
   "author": "",
   "license": "ISC",
