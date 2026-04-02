@@ -5,6 +5,9 @@ const path = require("path");
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+const routes = require("./router/router.js");
+const { getAllQuotes, AddQuotes } = require("./controllers/controller.js");
+
 //  Connect Database
 const db = new sqlite3.Database("./database.db", (err) => {
   if (err) console.error("Database opening error: ", err);
@@ -25,10 +28,10 @@ db.run(`CREATE TABLE IF NOT EXISTS quotes (
 
 // Routes
 // Fetch all quotes in JSON format
-app.use("/get-quotes");
+app.use("/get-quotes", getAllQuotes);
 
 // Add a new quote
-app.use("/add-quote");
+app.use("/add-quote", AddQuotes);
 
 app.listen(PORT, () => {
   console.log(`Server is listening on port ${PORT}...`);
