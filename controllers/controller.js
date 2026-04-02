@@ -1,11 +1,11 @@
-const addQuotes = (req, res) => {
+const getAllQuotes = (req, res) => {
   db.all("SELECT * FROM quotes ORDER BY created_at DESC", [], (err, rows) => {
     if (err) return res.status(500).json({ error: err.message });
     res.json(rows);
   });
 };
 
-const postQuotes = (req, res) => {
+const AddQuotes = (req, res) => {
   const { text, author } = req.body;
   if (!text) return res.status(400).json({ error: "Quote text is required" });
 
@@ -16,4 +16,4 @@ const postQuotes = (req, res) => {
   });
 };
 
-module.exports = { addQuotes, postQuotes };
+module.exports = { getAllQuotes, AddQuotes };
