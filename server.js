@@ -27,10 +27,10 @@ db.run(`CREATE TABLE IF NOT EXISTS quotes (
 
 // Routes
 // Fetch all quotes in JSON format
-app.get("/get-quotes", getAllQuotes);
+app.get("/get-quotes");
 
 // Add a new quote
-app.post("/add-quote", AddQuotes);
+app.post("/add-quote");
 
 app.listen(PORT, () => {
   console.log(`Server is listening on port ${PORT}...`);
