@@ -1,4 +1,4 @@
-const db = require("../server.js");
+const db = require("../db.js");
 
 const getAllQuotes = (req, res) => {
   db.all("SELECT * FROM quotes ORDER BY created_at DESC", [], (err, rows) => {

@@ -4,7 +4,7 @@ const router = express.Router();
 // Fetching the components from the controller
 const { getAllQuotes, AddQuotes } = require("../controllers/controller.js");
 
-router.get("/", getAllQuotes);
-router.post("/", AddQuotes);
+router.get("/api/quotes", getAllQuotes);
+router.post("/api/quotes", AddQuotes);
 
 module.exports = router;
