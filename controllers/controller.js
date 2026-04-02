@@ -1,3 +1,5 @@
+const db = require("../server.js");
+
 const getAllQuotes = (req, res) => {
   db.all("SELECT * FROM quotes ORDER BY created_at DESC", [], (err, rows) => {
     if (err) return res.status(500).json({ error: err.message });
