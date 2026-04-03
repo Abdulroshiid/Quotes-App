@@ -12,10 +12,7 @@ app.use(express.static("public")); // Serves your HTML/CSS/JS files
 
 // Routes
 // Fetch all quotes in JSON format
-app.use("/get-quotes", getAllQuotes);
-
-// Add a new quote
-app.use("/add-quote", AddQuotes);
+app.use("/", routes);
 
 app.listen(PORT, () => {
   console.log(`Server is listening on port ${PORT}...`);
