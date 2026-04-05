@@ -15,5 +15,5 @@ app.use(express.static("public")); // Serves your HTML/CSS/JS files
 app.use("/", routes);
 
 app.listen(PORT, () => {
-  console.log(`Server is listening on port ${PORT}...`);
+  console.log(`Server is on port ${PORT}...`);
 });
