@@ -3,7 +3,7 @@ const SQLite = require("sqlite3").verbose();
 //  Connect Database
 const db = new SQLite.Database("./database.db", (err) => {
   if (err) console.error("Database opening error: ", err);
-  console.log("Connected to SQLite database.");
+  console.log(`Connected to SQLite database.`);
 });
 
 // Initialize SQLite Table
