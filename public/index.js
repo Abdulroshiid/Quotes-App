@@ -22,18 +22,31 @@ async function fetchQuotes() {
 quoteForm.addEventListener("submit", async (e) => {
   e.preventDefault();
 
+  const submitBtn = quoteForm.querySelector('button[type="submit"]');
+  const originalText = submitBtn.textContent;
+
+  // Show loading state
+  submitBtn.disabled = true;
+  submitBtn.textContent = "Adding...";
+
   const text = document.getElementById("text").value;
   const author = document.getElementById("author").value;
 
-  const response = await fetch("/add-quote", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ text, author }),
-  });
+  try {
+    const response = await fetch("/add-quote", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ text, author }),
+    });
 
-  if (response.ok) {
-    quoteForm.reset();
-    fetchQuotes(); // Refresh list automatically
+    if (response.ok) {
+      quoteForm.reset();
+      fetchQuotes(); // Refresh list automatically
+    }
+  } finally {
+    // Reset loading state
+    submitBtn.disabled = false;
+    submitBtn.textContent = originalText;
   }
 });
 
