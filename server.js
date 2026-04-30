@@ -8,7 +8,7 @@ const route = require("./router/router.js");
 
 // Middleware
 app.use(express.json()); // Allows server to read JSON sent from frontend
-app.use(express.static("public")); // Serves your HTML/CSS/JS files
+app.use(express.static(path.join(__dirname, "public"))); // Serves your HTML/CSS/JS files
 
 // Routes
 // Fetch all quotes in JSON format
