@@ -12,6 +12,11 @@ app.use(express.static("public")); // Serves your HTML/CSS/JS files
 
 // Routes
 // Fetch all quotes in JSON format
+
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "index.html"));
+});
+
 app.use("/", route);
 
 app.listen(PORT, () => {
