@@ -12,6 +12,7 @@ async function fetchQuotes() {
         <div class="quote-card">
             <p>"${q.text}"</p>
             <span>— ${q.author}</span>
+            <button class="share-btn" data-text="${q.text}" data-author="${q.author}">Share</button>
         </div>
     `,
     )
@@ -52,3 +53,27 @@ quoteForm.addEventListener("submit", async (e) => {
 
 // Load quotes on page start
 fetchQuotes();
+
+// Share quote functionality
+quoteList.addEventListener("click", (e) => {
+  if (e.target.classList.contains("share-btn")) {
+    const text = e.target.dataset.text;
+    const author = e.target.dataset.author;
+    const quoteString = `"${text}" — ${author}`;
+    
+    // Try Web Share API first (mobile), fallback to clipboard
+    if (navigator.share) {
+      navigator.share({
+        title: "Quote from QuoteHub",
+        text: quoteString,
+      }).catch(() => {});
+    } else {
+      navigator.clipboard.writeText(quoteString).then(() => {
+        e.target.textContent = "Copied!";
+        setTimeout(() => {
+          e.target.textContent = "Share";
+        }, 2000);
+      });
+    }
+  }
+});
