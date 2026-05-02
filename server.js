@@ -5,10 +5,6 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 const route = require("./router/router.js");
-const { initTable } = require("./db.js");
-
-// Initialize database table
-initTable();
 
 // Middleware
 app.use(express.json()); // Allows server to read JSON sent from frontend
