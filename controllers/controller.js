@@ -1,21 +1,25 @@
-const db = require("../db.js");
+const { sql } = require("../db.js");
 
-const getAllQuotes = (req, res) => {
-  db.all("SELECT * FROM quotes ORDER BY created_at DESC", [], (err, rows) => {
-    if (err) return res.status(500).json({ error: err.message });
+const getAllQuotes = async (req, res) => {
+  try {
+    const { rows } = await sql`SELECT * FROM quotes ORDER BY created_at DESC`;
     res.json(rows);
-  });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 };
 
-const AddQuotes = (req, res) => {
+const AddQuotes = async (req, res) => {
   const { text, author } = req.body;
   if (!text) return res.status(400).json({ error: "Quote text is required" });
 
-  const query = `INSERT INTO quotes (text, author) VALUES (?, ?)`;
-  db.run(query, [text, author || "Anonymous"], function (err) {
-    if (err) return res.status(500).json({ error: err.message });
-    res.json({ id: this.lastID, text, author });
-  });
+  try {
+    const { rows } =
+      await sql`INSERT INTO quotes (text, author) VALUES (${text}, ${author || "Anonymous"}) RETURNING id, text, author`;
+    res.json(rows[0]);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 };
 
 module.exports = { getAllQuotes, AddQuotes };
