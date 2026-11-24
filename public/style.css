@@ -146,25 +146,51 @@ dialog::backdrop {
 .share-btn {
   background-color: #3498db;
   color: white;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 0.85em;
+}
+
+.card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.card-actions button {
   width: auto;
-  align-self: flex-start;
+  padding: 8px 10px;
+  font-size: 0.82rem;
 }
 
-.share-btn:hover {
-  background-color: #2980b9;
+.like-btn,
+.favorite-btn {
+  background: #ecf0f1;
+  color: #2c3e50;
 }
 
-.quote-card p {
-  font-style: italic;
-  font-size: 1.1rem;
-  margin-bottom: 5px;
+.like-btn.active {
+  background: #e74c3c;
+  color: white;
 }
-.quote-card span {
-  color: #7f8c8d;
-  font-size: 0.9rem;
+
+.favorite-btn.active {
+  background: #f1c40f;
+  color: #2c3e50;
+}
+
+.edit-btn {
+  background: #27ae60;
+}
+
+.delete-btn {
+  background: #c0392b;
+}
+
+@media (max-width: 520px) {
+  .toolbar {
+    grid-template-columns: 1fr;
+  }
+
+  .card-actions button {
+    flex: 1 1 45%;
+  }
 }
