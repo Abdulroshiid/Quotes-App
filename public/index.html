@@ -14,18 +14,41 @@
         <textarea
           id="text"
           placeholder="Enter a meaningful quote..."
+          maxlength="500"
           required></textarea>
+        <small id="character-count">0 / 500</small>
         <input
           type="text"
           id="author"
-          placeholder="Name of Author (optional)" />
+          placeholder="Name of Author (optional)"
+          maxlength="100" />
         <button type="submit">Add Quote</button>
       </form>
 
-      <hr />
+      <div class="toolbar">
+        <input id="search" type="search" placeholder="Search quotes or authors..." />
+        <select id="filter" aria-label="Filter quotes">
+          <option value="all">All quotes</option>
+          <option value="favorites">Favorites</option>
+          <option value="popular">Most liked</option>
+        </select>
+      </div>
 
+      <div id="status" role="status" aria-live="polite"></div>
       <div id="quote-list"></div>
     </div>
+
+    <dialog id="edit-dialog">
+      <form id="edit-form">
+        <h2>Edit quote</h2>
+        <textarea id="edit-text" maxlength="500" required></textarea>
+        <input id="edit-author" maxlength="100" placeholder="Author" />
+        <div class="dialog-actions">
+          <button type="button" id="cancel-edit">Cancel</button>
+          <button type="submit">Save changes</button>
+        </div>
+      </form>
+    </dialog>
 
     <script src="index.js"></script>
   </body>
