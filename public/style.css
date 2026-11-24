@@ -41,6 +41,87 @@ button:hover {
   background-color: #34495e;
 }
 
+.toolbar {
+  display: grid;
+  grid-template-columns: 1fr 150px;
+  gap: 10px;
+  margin: 20px 0 10px;
+}
+
+.toolbar input,
+.toolbar select {
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background: white;
+}
+
+#character-count {
+  display: block;
+  margin: -6px 0 10px;
+  text-align: right;
+  color: #7f8c8d;
+}
+
+#status {
+  min-height: 20px;
+  margin: 8px 0;
+  text-align: center;
+}
+
+#status.success {
+  color: #218838;
+}
+
+#status.error {
+  color: #c0392b;
+}
+
+.empty-state {
+  padding: 30px;
+  text-align: center;
+  color: #7f8c8d;
+}
+
+dialog {
+  max-width: 520px;
+  width: calc(100% - 40px);
+  border: none;
+  border-radius: 12px;
+  padding: 0;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
+}
+
+dialog::backdrop {
+  background: rgba(44, 62, 80, 0.55);
+}
+
+#edit-form {
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+}
+
+#edit-form h2 {
+  margin-top: 0;
+}
+
+.dialog-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.dialog-actions button {
+  flex: 1;
+}
+
+.dialog-actions #cancel-edit {
+  background: #95a5a6;
+}
+
 .quote-card {
   background: #fff;
   border-left: 5px solid #2c3e50;
