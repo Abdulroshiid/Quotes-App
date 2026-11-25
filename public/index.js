@@ -60,13 +60,15 @@ quoteList.addEventListener("click", (e) => {
     const text = e.target.dataset.text;
     const author = e.target.dataset.author;
     const quoteString = `"${text}" — ${author}`;
-    
+
     // Try Web Share API first (mobile), fallback to clipboard
     if (navigator.share) {
-      navigator.share({
-        title: "Quote from QuoteHub",
-        text: quoteString,
-      }).catch(() => {});
+      navigator
+        .share({
+          title: "Quote from QuoteHub",
+          text: quoteString,
+        })
+        .catch(() => {});
     } else {
       navigator.clipboard.writeText(quoteString).then(() => {
         e.target.textContent = "Copied!";
