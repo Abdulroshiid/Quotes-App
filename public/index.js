@@ -55,27 +55,41 @@ quoteForm.addEventListener("submit", async (e) => {
 fetchQuotes();
 
 // Share quote functionality
-quoteList.addEventListener("click", (e) => {
-  if (e.target.classList.contains("share-btn")) {
-    const text = e.target.dataset.text;
-    const author = e.target.dataset.author;
-    const quoteString = `"${text}" — ${author}`;
+quoteList.addEventListener("click", async (e) => {
+  const shareButton = e.target.closest(".share-btn");
+  if (!shareButton) return;
 
-    // Try Web Share API first (mobile), fallback to clipboard
-    if (navigator.share) {
-      navigator
-        .share({
-          title: "Quote from QuoteHub",
-          text: quoteString,
-        })
-        .catch(() => {});
-    } else {
-      navigator.clipboard.writeText(quoteString).then(() => {
-        e.target.textContent = "Copied!";
-        setTimeout(() => {
-          e.target.textContent = "Share";
-        }, 2000);
+  const text = shareButton.dataset.text;
+  const author = shareButton.dataset.author;
+  const quoteString = `"${text}" — ${author}`;
+
+  if (navigator.share) {
+    try {
+      await navigator.share({
+        title: "Quote from QuoteHub",
+        text: quoteString,
       });
+    } catch (error) {
+      if (error.name !== "AbortError") {
+        showShareFallback(quoteString, shareButton);
+      }
     }
+  } else {
+    showShareFallback(quoteString, shareButton);
   }
 });
+
+function showShareFallback(quoteString, shareButton) {
+  const shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(quoteString)}`;
+  const popup = window.open(shareUrl, "share-quote", "noopener,noreferrer,width=640,height=520");
+
+  if (!popup) {
+    shareButton.textContent = "Pop-up blocked";
+  } else {
+    shareButton.textContent = "Opened share window";
+  }
+
+  setTimeout(() => {
+    shareButton.textContent = "Share";
+  }, 2000);
+}
